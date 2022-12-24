@@ -55,7 +55,9 @@ valid_size = 0.15
 epoch = 5  # 15
 print('epoch = ' + str(epoch))
 
-random_seed = random.randint(1, 100)
+### (lzj: fix random seed)
+random_seed = 42
+# random_seed = random.randint(1, 100)
 print('random_seed = ' + str(random_seed))
 
 shuffle = True
