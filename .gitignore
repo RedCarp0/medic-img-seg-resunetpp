@@ -1,7 +1,7 @@
 # (lzj: datapath and outputs)
 datasets/
 model/
-
+temp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
