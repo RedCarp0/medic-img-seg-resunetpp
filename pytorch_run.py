@@ -103,12 +103,12 @@ torchsummary.summary(model_test, input_size=(3, 128, 128))
 #Passing the Dataset of Images and Labels
 #######################################################
 
-t_data = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/train/'
-l_data = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/train_label/'
-test_image = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/test/0001.jpg'
-test_label = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/test_label/0001.png'
-test_folderP = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/test/*'
-test_folderL = '/home/lzj/Workspace/ModernSigProc_course/medic-img-seg-resunetpp/datasets/origin/test_label/*'
+t_data = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/train/'
+l_data = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/train_label/'
+test_image = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/test/0001.jpg'
+test_label = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/test_label/0001.png'
+test_folderP = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/test/*'
+test_folderL = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg-resunetpp/datasets/origin/test_label/*'
 
 
 
