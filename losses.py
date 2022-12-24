@@ -38,7 +38,7 @@ def calc_loss(prediction, target, bce_weight=0.5):
     return loss
 
 
-def threshold_predictions_v(predictions, thr=150):
+def threshold_predictions_v(predictions, thr=200):
     thresholded_preds = predictions[:]
    # hist = cv2.calcHist([predictions], [0], None, [2], [0, 2])
    # plt.plot(hist)
@@ -47,7 +47,11 @@ def threshold_predictions_v(predictions, thr=150):
     low_values_indices = thresholded_preds < thr
     thresholded_preds[low_values_indices] = 0
     low_values_indices = thresholded_preds >= thr
-    thresholded_preds[low_values_indices] = 255
+    
+    ### (lzj: change it to 0/1)
+    # thresholded_preds[low_values_indices] = 255
+    thresholded_preds[low_values_indices] = 1
+    
     return thresholded_preds
 
 

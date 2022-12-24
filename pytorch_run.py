@@ -52,7 +52,7 @@ print('batch_size = ' + str(batch_size))
 
 valid_size = 0.15
 
-epoch = 5  # 15
+epoch = 15  # 15
 print('epoch = ' + str(epoch))
 
 ### (lzj: fix random seed)
@@ -127,7 +127,8 @@ test_folderL = '/data/zijun/Workspaces/CourseProj_ws/ModernSigProc/medic-img-seg
 #         ])
 data_transform = torchvision.transforms.Compose(
     [
-                torchvision.transforms.CenterCrop(2000),
+                # torchvision.transforms.Pad(500, fill=0),                
+                # torchvision.transforms.CenterCrop(2000),
                 torchvision.transforms.Resize((128,128)),
                 # torchvision.transforms.CenterCrop(96),
                 # torchvision.transforms.RandomRotation((-10,10)),
@@ -140,7 +141,8 @@ data_transform = torchvision.transforms.Compose(
 )
 label_transform = torchvision.transforms.Compose(
     [
-                torchvision.transforms.CenterCrop(2000),        
+                # torchvision.transforms.Pad(500, fill=254),
+                # torchvision.transforms.CenterCrop(2000),        
                torchvision.transforms.Resize((128,128)),
                 # torchvision.transforms.CenterCrop(96),
                 # torchvision.transforms.RandomRotation((-10,10)),
@@ -342,7 +344,7 @@ for i in range(epoch):
     pred_tb = F.sigmoid(pred_tb)
     pred_tb = pred_tb.detach().numpy()
 
-   #pred_tb = threshold_predictions_v(pred_tb)
+
 
     x1 = plt.imsave(
         './model/pred/img_iteration_' + str(n_iter) + '_epoch_'
@@ -538,7 +540,7 @@ for i in range(len(read_test_folder)):
         img_test_no = img_test_no + 1
 
     x1 = plt.imsave('./model/gen_images/im_epoch_' + str(epoch) + 'int_' + str(i)
-                    + '_img_no_' + str(img_test_no) + '.png', pred[0][0])
+                    + '_img_no_' + str(img_test_no) + '.png', pred[0][0], cmap='gray')
 
 
 ####################################################
@@ -568,47 +570,77 @@ dice_score123 = 0.0
 x_count = 0
 x_dice = 0
 
+accuracy, precision, recall = 0.0, 0.0, 0.0
+
 for i in range(len(read_test_folderP)):
 
     x = Image.open(x_sort_testP[i])
     s = grayscale_transform(x)
     s = np.array(s)
     s = threshold_predictions_v(s)
+    
+    ### (lzj: test)
+    # print(f's: {s}')
 
     ### (lzj: comment this)
     #save the images
     x1 = plt.imsave('./model/pred_threshold/im_epoch_' + str(epoch) + 'int_' + str(i)
-                    + '_img_no_' + str(img_test_no) + '.png', s)
+                    + '_img_no_' + str(img_test_no) + '.png', s, cmap='gray')
 
     y = Image.open(x_sort_testL[i])
+    
     
     ### (lzj: add label_transform)
     s1 = label_transform(y)
     # s2 = grayscale_transform(s1)
+     
+    
     s2 = s1
-    # s2 =threshold_predictions_v(s2)
+
     s3 = np.array(s2)
     
-    ### (lzj: comment this)
-    ###save the Images
-    # y1 = plt.imsave('./model/label_threshold/im_epoch_' + str(epoch) + 'int_' + str(i)
-    #                 + '_img_no_' + str(img_test_no) + '.png', s3)
+    
+    ### (lzj: test)
+    # print(f's3: {s3}')
 
     ## (lzj:test)
-    print(f's.shape: {s.shape}, s3.shape: {s3.shape}')
+    # print(f's.shape: {s.shape}, s3.shape: {s3.shape}')
     s3 = s3.squeeze()
 
+
+    ### (lzj: comment this)
+    ###save the Images
+    y1 = plt.imsave('./model/label_threshold/im_epoch_' + str(epoch) + 'int_' + str(i)
+                    + '_img_no_' + str(img_test_no) + '.png', s3, cmap='gray')
+
+
+    ### count scores
     total = dice_coeff(s, s3)
-    print(total)
-
-    if total <= 0.3:
-        x_count += 1
-    if total > 0.3:
-        x_dice = x_dice + total
+    print(f'Image dice_coefficient: {total}')
+    acc, pre, rec = accuracy_score(s, s3)
+    print(f'Image accuracy: {acc}, precision: {pre}, recall: {rec}')
+    
+    
+    ### (lzj: add accuracy score)
+    
+    # if total <= 0.3:
+    #     x_count += 1
+    # if total > 0.3:
+    #     x_dice = x_dice + total
+    
+    
+        
     dice_score123 = dice_score123 + total
+    accuracy = accuracy + acc
+    precision = precision + pre
+    recall = recall + rec
 
 
-print('Dice Score : ' + str(dice_score123/len(read_test_folderP)))
+print('Average Dice Score : ' + str(dice_score123/len(read_test_folderP)))
+print(f'Average accuracy : {accuracy / len(read_test_folderP)}')
+print(f'Average precision : {precision / len(read_test_folderP)}')
+print(f'Average recall : {recall / len(read_test_folderP)}')
+
 #print(x_count)
 #print(x_dice)
 #print('Dice Score : ' + str(float(x_dice/(len(read_test_folderP)-x_count))))

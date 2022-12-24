@@ -1,6 +1,7 @@
 # medic-img-seg-resunetpp
 
 ## Note
+
 requirements.txt lack matplotlib
 
 requirements.txt lack visdom
@@ -11,5 +12,12 @@ correct file path should include:
 
 model/
 datasets/
+
+
+TODO: 
+
+accuracy score
+
+picture color
 
 
