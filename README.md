@@ -2,6 +2,7 @@
 
 ## Note
 requirements.txt lack matplotlib
+
 requirements.txt lack visdom
 
 remember to change the model 
