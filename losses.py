@@ -38,7 +38,7 @@ def calc_loss(prediction, target, bce_weight=0.5):
     return loss
 
 
-def threshold_predictions_v(predictions, thr=200):
+def threshold_predictions_v(predictions, thr=150):
     thresholded_preds = predictions[:]
    # hist = cv2.calcHist([predictions], [0], None, [2], [0, 2])
    # plt.plot(hist)
