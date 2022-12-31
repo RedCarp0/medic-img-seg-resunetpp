@@ -9,3 +9,5 @@ pillow
 scipy
 scikit-image
 sklearn
+matplotlib
+visdom
