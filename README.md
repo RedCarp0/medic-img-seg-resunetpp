@@ -14,10 +14,5 @@ model/
 datasets/
 
 
-TODO: 
-
-accuracy score
-
-picture color
 
 
