@@ -6,7 +6,7 @@
 ```
 medic-img-seg-resunetpp/
 ├── 2d_from_3d.py
-├── Data_Loader.py
+├── Data_Loader.pygi
 ├── datasets
 │   ├── after_trans
 │   └── origin
@@ -15,12 +15,6 @@ medic-img-seg-resunetpp/
 ├── Metrics.py
 ├── Models.py
 ├── ploting.py
-├── __pycache__
-│   ├── Data_Loader.cpython-38.pyc
-│   ├── losses.cpython-38.pyc
-│   ├── Metrics.cpython-38.pyc
-│   ├── Models.cpython-38.pyc
-│   └── ploting.cpython-38.pyc
 ├── README.md
 ├── requirements.txt
 └── train_val.py
